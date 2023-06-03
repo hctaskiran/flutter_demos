@@ -1,2 +1,3 @@
 Simple Login System UI 
-+ Added animations.
+# 02.06.2023
+  Added animations.
