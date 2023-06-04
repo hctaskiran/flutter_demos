@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "638639771003",
+    "project_id": "authtutorial-fd130",
+    "storage_bucket": "authtutorial-fd130.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:638639771003:android:31b88fafb48292cdd881de",
+        "android_client_info": {
+          "package_name": "com.example.login_system_tutorial1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC9Ry4_aGcGoQPKliHvGYn8NcX3TJh91Gk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

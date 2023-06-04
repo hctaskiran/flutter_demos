@@ -6,18 +6,65 @@
 
 
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:login_system_tutorial1/components/button.dart';
+import 'package:login_system_tutorial1/components/text_field.dart';
 import 'package:lottie/lottie.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 
-class TutorialLoginSystem extends StatelessWidget {
-  const TutorialLoginSystem({super.key, this.onTap});
+class TutorialLoginSystem extends StatefulWidget {
+  TutorialLoginSystem({super.key,});
 
-  final Function()? onTap;
+  @override
+  State<TutorialLoginSystem> createState() => _TutorialLoginSystemState();
+}
 
-  void userSignIn() {}
+class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
+  final emailController = TextEditingController();
 
+  final passwordController = TextEditingController();
+
+  // sign in user
+  void userSignIn() async {
+    // loading circle
+    showDialog(context: context, builder:(context) {
+      return Center(child: CircularProgressIndicator());
+    });
+    
+    // sign in
+    try {
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+    email: emailController.text, 
+    password: passwordController.text);
+      Navigator.pop(context);
+    } on FirebaseAuthException catch (e) {
+      Navigator.pop(context);
+      // wrong mail
+      if (e.code == "user-not-found") {
+        wrongEmailMessage();
+
+        // wrong pass
+      } else if (e.code == "wrong-password"){
+        wrongPasswordMessage();
+      }
+    }
+  }
+
+  // wrong mail msg
+  void wrongEmailMessage() {
+    showDialog(context: context, builder:(context) {
+      return AlertDialog(title: Text("Неверная Э-Почта"));
+    });
+  }
+
+  // wrong pass msg
+  void wrongPasswordMessage() {
+    showDialog(context: context, builder:(context) {
+      return AlertDialog(title: Text("Неверный Пароль"));
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,13 +92,28 @@ class TutorialLoginSystem extends StatelessWidget {
                   const SizedBox(height: 50,),
         
                 // nick
-      
-                _userName(),
+                UserAndPass(
+                  controller: emailController,
+                  labelText: 'Почта',
+                  hintText: "Введите электронную почту",
+                  obscureText: false, 
+                  labelStyle: TextStyle(color: Colors.black), 
+                  hintStyle: TextStyle(color: Colors.black), 
+                  prefixIcon: Icon(Icons.mail, color: Colors.black),
+                ),
       
                 const SizedBox(height: 10),
       
                 // passwd
-                _passwd(),
+                UserAndPass(
+                  controller: passwordController,
+                  labelText: "Пароль",
+                  hintText: "Введите пароль",
+                  obscureText: true,
+                  labelStyle: TextStyle(color: Colors.black),
+                  hintStyle: TextStyle(color: Colors.black),
+                  prefixIcon: Icon(Icons.lock, color: Colors.black),
+                ),
                 
                 const SizedBox(height: 10,),
         
@@ -60,9 +122,8 @@ class TutorialLoginSystem extends StatelessWidget {
       
                 const SizedBox(height: 25,),
                 // sign
-                GestureDetector(
+                CustomSignIn(
                   onTap: userSignIn,
-                  child: _signInButton(),
                 ),
                 
                 const SizedBox(height: 50),
@@ -166,9 +227,6 @@ class _orLoginWith extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 8.0),
             child: 
-            // AnimatedTextKit(animatedTexts: 
-            // [FadeAnimatedText("Или войти через", 
-            // textStyle: TextStyle(color: Colors.black, fontSize: 15))])
             Text("Или войти через", style: TextStyle(color: Colors.black, fontSize: 15)),
           ),
 
@@ -178,67 +236,6 @@ class _orLoginWith extends StatelessWidget {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _userName extends StatelessWidget {
-  const _userName({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
-        style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-          labelText: "Почта",
-          labelStyle: TextStyle(color: Colors.black),
-          hintText: "Введите электронную почту",
-          hintStyle: TextStyle(color: Colors.black),
-          prefixIcon: Icon(Icons.mail, color: Colors.black,),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87)),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.purple)
-            ),
-            fillColor: Colors.grey.shade200,
-            filled: true
-        ),
-      ),
-    );
-  }
-}
-
-class _passwd extends StatelessWidget {
-  const _passwd({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 25.0),
-      child: TextField(
-        obscureText: true,
-        style: TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-          labelText: "Пароль",
-          labelStyle: TextStyle(color: Colors.black),
-          hintText: "Введите пароль",
-          hintStyle: TextStyle(color: Colors.black),
-          prefixIcon: Icon(Icons.key, color: Colors.black),
-          enabledBorder: OutlineInputBorder(
-            borderSide: BorderSide(color: Colors.black87)),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.purple)
-            ),
-            fillColor: Colors.grey.shade200,
-            filled: true
-        ),
       ),
     );
   }
@@ -259,25 +256,6 @@ class _resetPasswd extends StatelessWidget {
           Text("Забыли пароль?", style: TextStyle(color: Colors.black, fontSize: 14)),
         ],
       ),
-    );
-  }
-}
-
-
-class _signInButton extends StatelessWidget {
-  const _signInButton({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(25),
-      margin: EdgeInsets.symmetric(horizontal: 50),
-      decoration: BoxDecoration(color: Colors.black, borderRadius: BorderRadius.circular(8)),
-      child: Center(
-        child: Text(
-          "Вход", style: TextStyle(color: Colors.white, fontSize: 16, fontWeight: FontWeight.bold))),
     );
   }
 }
