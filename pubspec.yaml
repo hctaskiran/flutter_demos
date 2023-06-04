@@ -43,6 +43,15 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
 
+  flutter_native_splash: ^2.0.1+1
+  flutter_lints: ^2.0.1
+
+flutter_native_splash:
+  background_image: lib/assets/pink_bg.jpeg
+  image: lib/assets/bird.png
+  ios: true
+
+
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
   # activated in the `analysis_options.yaml` file located at the root of your
@@ -63,7 +72,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - lib/images/
+    - lib/assets/
   # - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
