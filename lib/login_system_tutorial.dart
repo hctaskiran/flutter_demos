@@ -41,28 +41,19 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
-      // wrong mail
-      if (e.code == "user-not-found") {
-        wrongEmailMessage();
-
-        // wrong pass
-      } else if (e.code == "wrong-password"){
-        wrongPasswordMessage();
-      }
+      // show error message
+      showErrorMessage(e.code);
     }
   }
 
-  // wrong mail msg
-  void wrongEmailMessage() {
+  // error message 
+  void showErrorMessage(String message) {
     showDialog(context: context, builder:(context) {
-      return AlertDialog(title: Text("Неверная Э-Почта"));
-    });
-  }
-
-  // wrong pass msg
-  void wrongPasswordMessage() {
-    showDialog(context: context, builder:(context) {
-      return AlertDialog(title: Text("Неверный Пароль"));
+      return AlertDialog(
+        backgroundColor: Colors.amber,
+        title: Center(
+          child: 
+            Text(message)));
     });
   }
 
