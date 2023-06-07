@@ -77,17 +77,13 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                 const SizedBox(height: 20),
-      
-                // logo
-                // Icon(Icons.lock, color: Colors.black, size: 100,),
-                // AnimatedIcon(icon: Icons., progress: progress),
+    
                 Lottie.network("https://assets3.lottiefiles.com/packages/lf20_xhyszish.json", animate: null, width: 150),
                 
-      
                 const SizedBox(height: 25),
         
                 // wlcm
-                _welcome(),
+                welcome(),
       
                   const SizedBox(height: 50,),
         
@@ -118,7 +114,7 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 const SizedBox(height: 10,),
         
                 // reset passwd?
-                _resetPasswd(),
+                resetPasswd(),
       
                 const SizedBox(height: 25,),
                 // sign
@@ -129,7 +125,7 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 const SizedBox(height: 50),
         
                 // google apple auth
-                _orLoginWith(),
+                orLoginWith(),
       
                 SizedBox(height: 50,),
       
@@ -150,7 +146,7 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 ),
                 SizedBox(height: 60),
       
-                _signUp()
+                signUp()
               
                 
               ],
@@ -162,8 +158,8 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
   }
 }
 
-class _welcome extends StatelessWidget {
-  const _welcome({
+class welcome extends StatelessWidget {
+  const welcome({
     super.key,
   });
 
@@ -183,32 +179,27 @@ class _welcome extends StatelessWidget {
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 
-class _signUp extends StatelessWidget {
-  const _signUp({
+class signUp extends StatelessWidget {
+  const signUp({
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
-      // mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Padding(
-          padding: const EdgeInsets.only(left: 50),
-          child: Text("У вас аккаунта нет?",style: TextStyle(color: Colors.black),),
-        ),
+        Text("У вас аккаунта нет?",style: TextStyle(color: Colors.black),),
         SizedBox(width: 4,),
-        AnimatedTextKit(animatedTexts: [
-          FadeAnimatedText("Зарегистрируйтесь!", 
-          textStyle: TextStyle(
-            color: Colors.green.shade400, fontWeight: FontWeight.bold))])
-      ],
+          Text("Зарегистрируйтесь!", 
+          style: TextStyle(
+            color: const Color.fromARGB(255, 23, 147, 29), fontWeight: FontWeight.bold))]
     );
   }
 }
 
-class _orLoginWith extends StatelessWidget {
-  const _orLoginWith({
+class orLoginWith extends StatelessWidget {
+  const orLoginWith({
     super.key,
   });
 
@@ -241,8 +232,8 @@ class _orLoginWith extends StatelessWidget {
   }
 }
 
-class _resetPasswd extends StatelessWidget {
-  const _resetPasswd({
+class resetPasswd extends StatelessWidget {
+  const resetPasswd({
     super.key,
   });
 
