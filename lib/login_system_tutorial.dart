@@ -70,23 +70,23 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.grey[300],
-      body: SingleChildScrollView(
-        child: SafeArea(
-          child: Center(
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children:  [
                 const SizedBox(height: 20),
-    
+              
                 Lottie.network("https://assets3.lottiefiles.com/packages/lf20_xhyszish.json", animate: null, width: 150),
                 
                 const SizedBox(height: 25),
-        
+                
                 // wlcm
                 welcome(),
-      
+                
                   const SizedBox(height: 50,),
-        
+                
                 // nick
                 UserAndPass(
                   controller: emailController,
@@ -97,9 +97,9 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                   hintStyle: TextStyle(color: Colors.black), 
                   prefixIcon: Icon(Icons.mail, color: Colors.black),
                 ),
-      
+                
                 const SizedBox(height: 10),
-      
+                
                 // passwd
                 UserAndPass(
                   controller: passwordController,
@@ -112,10 +112,10 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 ),
                 
                 const SizedBox(height: 10,),
-        
+                
                 // reset passwd?
                 resetPasswd(),
-      
+                
                 const SizedBox(height: 25,),
                 // sign
                 CustomSignIn(
@@ -123,12 +123,12 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 ),
                 
                 const SizedBox(height: 50),
-        
+                
                 // google apple auth
                 orLoginWith(),
-      
+                
                 SizedBox(height: 50,),
-      
+                
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -145,7 +145,7 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                   ],
                 ),
                 SizedBox(height: 60),
-      
+                
                 signUp()
               
                 
