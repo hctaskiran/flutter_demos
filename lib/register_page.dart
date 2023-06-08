@@ -7,28 +7,28 @@ import 'package:lottie/lottie.dart';
 import 'package:animated_text_kit/animated_text_kit.dart';
 
 
-class TutorialLoginSystem extends StatefulWidget {
-  TutorialLoginSystem({super.key, required this.ontap,});
+class RegisterPage extends StatefulWidget {
+  RegisterPage({super.key, required this.ontap,});
 
   final Function()? ontap;
 
   @override
-  State<TutorialLoginSystem> createState() => _TutorialLoginSystemState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
+class _RegisterPageState extends State<RegisterPage> {
   final emailController = TextEditingController();
 
   final passwordController = TextEditingController();
 
-  // sign in user
-  void userSignIn() async {
+  // sign up user
+  void userSignUp() async {
     // loading circle
     showDialog(context: context, builder:(context) {
       return Center(child: CircularProgressIndicator());
     });
     
-    // sign in
+    // create account
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
     email: emailController.text, 
@@ -76,12 +76,10 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 // nick
                 UserAndPass(
                   controller: emailController,
-                  labelText: 'Почта',
+                  labelText: '',
                   hintText: "Введите электронную почту",
-                  obscureText: false, 
-                  labelStyle: TextStyle(color: Colors.black), 
+                  obscureText: false,  
                   hintStyle: TextStyle(color: Colors.black), 
-                  prefixIcon: Icon(Icons.mail, color: Colors.black),
                 ),
                 
                 const SizedBox(height: 10),
@@ -89,15 +87,22 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 // passwd
                 UserAndPass(
                   controller: passwordController,
-                  labelText: "Пароль",
+                  labelText: '',
                   hintText: "Введите пароль",
                   obscureText: true,
-                  labelStyle: TextStyle(color: Colors.black),
-                  hintStyle: TextStyle(color: Colors.black),
-                  prefixIcon: Icon(Icons.lock, color: Colors.black),
+                  hintStyle: TextStyle(color: Colors.black)
                 ),
                 
                 const SizedBox(height: 10,),
+
+                 // confirm passwd
+                UserAndPass(
+                  controller: passwordController,
+                  labelText: '',
+                  hintText: "Введите пароль ещё раз",
+                  obscureText: true,
+                  hintStyle: TextStyle(color: Colors.black),
+                ),
                 
                 // reset passwd?
                 resetPasswd(),
@@ -105,7 +110,7 @@ class _TutorialLoginSystemState extends State<TutorialLoginSystem> {
                 const SizedBox(height: 25,),
                 // sign
                 CustomSignIn(
-                  onTap: userSignIn,
+                  onTap: userSignUp,
                 ),
                 
                 const SizedBox(height: 50),
@@ -176,12 +181,12 @@ class signUp extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text("У вас аккаунта нет?",style: TextStyle(color: Colors.black),),
+        Text("Уже создали аккаунт?",style: TextStyle(color: Colors.black),),
         SizedBox(width: 4,),
         
         GestureDetector(
           onTap: widget.onTap,
-          child: const Text("Зарегистрируйтесь!", 
+          child: const Text("Войти сейчас!", 
             style: TextStyle(
               color: const Color.fromARGB(255, 23, 147, 29), fontWeight: FontWeight.bold)),
         )]
